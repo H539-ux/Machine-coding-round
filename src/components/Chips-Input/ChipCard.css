@@ -1,0 +1,14 @@
+.card-container{
+    display: flex;
+    width: 60px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    padding: 3px;
+    background-color: rgb(75, 194, 75);
+}
+
+.card-container>span{
+    cursor: pointer;
+    color: red;
+}
