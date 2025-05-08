@@ -1,0 +1,9 @@
+.child{
+    margin:4px;
+    width:80%;
+}
+
+.child:hover{
+    cursor:pointer;
+    color: rgb(167, 167, 236);
+}
