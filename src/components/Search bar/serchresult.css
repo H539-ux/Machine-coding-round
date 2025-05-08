@@ -1,0 +1,10 @@
+.result-container{
+    display:flex;
+    border:1px solid;
+    padding: 4px;
+    width:300px;
+    max-height: 250px;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
