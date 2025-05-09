@@ -8,7 +8,8 @@ const SearchBarHome = () => {
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showResults,setShowResults]= useState(false)
+  const [showResults, setShowResults] = useState(false);
+  const [error, setError] = useState("");
   const getData = async () => {
     try {
       setLoading(true);
@@ -20,6 +21,7 @@ const SearchBarHome = () => {
     } catch (e) {
       console.log(e);
       setLoading(false);
+      setError("failed to fetch data");
     } finally {
       setLoading(false);
     }
@@ -29,25 +31,31 @@ const SearchBarHome = () => {
   }, []);
 
   const handleSearch = (input) => {
-    
+    setError("");
     const newData = data.filter((item) =>
       item.name.toLowerCase().includes(input.toLowerCase())
     );
+    if (newData.length === 0) {
+      setError("no data found");
+    }
     setFilterData(newData);
   };
   return (
     <div className="home-container">
-      <SearchInput 
-       onSearch={handleSearch}
-       onFocus={()=>setShowResults(true)}
-       onBlur={()=>setShowResults(false)}
-       />
-      {loading ? (<p>...loading</p>) : (showResults&&<Results data={filterData}/>)}
+      <SearchInput
+        onSearch={handleSearch}
+        onFocus={() => setShowResults(true)}
+        onBlur={() => setShowResults(false)}
+      />
+      {error.length > 0 ? (
+        <p>{error}</p>
+      ) : loading ? (
+        <p>..loading</p>
+      ) : (
+        showResults && <Results data={filterData} />
+      )}
     </div>
   );
 };
 
 export default SearchBarHome;
-
-
-
